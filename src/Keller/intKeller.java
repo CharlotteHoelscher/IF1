@@ -13,5 +13,7 @@ public interface intKeller {
 
         // löscht das oberste Kellerelement
         public int pop();
+
+
     }
 
