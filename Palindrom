@@ -1,0 +1,44 @@
+package Palindrom;
+
+import Keller.intArrayKeller;
+import Keller.intKeller;
+
+public class Main {
+
+    private String word = "anna";
+    intKeller r = new intArrayKeller();
+    intKeller f = new intArrayKeller();
+
+
+    public void wordToStack() {
+        for (int i = 0; i < word.length(); i++) {
+            r.push(word.charAt(i));
+        }
+
+        for (int i = word.length(); i > 0; i--) {
+            f.push(word.charAt(i));
+        }
+    }
+
+
+
+
+    public boolean palindromPruefen() {
+
+        while (!r.isEmpty() && !f.isEmpty()) {
+            if (r.peek() == f.peek()) {
+                r.pop();
+                f.pop();
+            } else {
+                System.out.println("Es handelt sich nicht um eine Palindrom");
+                return false;
+            }
+        }
+
+        if (r.isEmpty() && f.isEmpty()) {
+            return true;
+
+        }
+        return true;  }
+}
+
