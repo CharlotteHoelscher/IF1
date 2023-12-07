@@ -28,6 +28,6 @@ public class pfz {
     }
 
     public static void main(String[] args) {
-        System.out.println(pfz(345786));
+        System.out.println(pfz(34));
     }
 }
