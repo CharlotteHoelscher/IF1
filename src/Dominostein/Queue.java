@@ -1,5 +1,7 @@
 package Dominostein;
 
+import Schlange.intArraySchlange;
+
 public class Queue<E> {
     private class Node {
         E item;
@@ -36,6 +38,8 @@ public class Queue<E> {
         if (isEmpty()) last = null;
         return item;
     }
+
+
     public String toString() {
         String s = "";
         for (Node p = first; p != null; p = p.next)
