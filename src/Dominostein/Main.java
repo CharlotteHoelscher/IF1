@@ -14,7 +14,7 @@ public class Main {
         System.out.println(q);
 
         System.out.println (ringPruefen());
-       ringBilden();
+     //  ringBilden();
 
     }
 
@@ -65,7 +65,7 @@ public class Main {
            if(q.head().getLinks()== aktuell.getRechts()){
                System.out.println(ring);
            }else{
-               throw new RuntimeException("Vorausetztung nicht erfüllt");
+         //      throw new RuntimeException("Vorausetztung nicht erfüllt");
            }
        }
     }
