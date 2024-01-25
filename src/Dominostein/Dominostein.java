@@ -2,6 +2,8 @@ package Dominostein;
 
 public class Dominostein {
 
+
+
     private int links;
     private int rechts;
 
