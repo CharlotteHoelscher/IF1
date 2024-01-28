@@ -17,7 +17,7 @@ public class vigenere {
             char c = klar.charAt(i);
 
             int schlüssel = schlüsselwort.charAt(j) - 65;
-            geheim += (char)((c - 65 + schlüssel) % 26 + 65);
+            geheim += (char)((c- 65 +schlüssel) % 26 + 65);
 
             j = (j + 1) % schlüsselwort.length();
         }
@@ -28,26 +28,25 @@ public class vigenere {
     public static String decode(String geheim, String schlüsselwort) {
         String klar = "";
 
+        int j = 0;
 
         for (int i = 0; i < geheim.length(); i++) {
-            for (int j=0; j<schlüsselwort.length(); j++ ){
+            char c = geheim.charAt(i);
 
-                char c = geheim.charAt(i);
+            int schlüssel = schlüsselwort.charAt(j)-65;
 
-                int schlüssel = schlüsselwort.charAt(j) - 65;
-
-                klar+= (char)(c-schlüssel);
-
-
+            if (c-65 -schlüssel<0){
+                schlüssel= schlüssel-26;
             }
-            //int schlüssel = schlüsselwort.charAt(j) - 65;
-          // klar += (char)((c - 65 + schlüssel) % 26 + 65);
 
-          //  j = (j + 1) % schlüsselwort.length();
+            klar += (char)(((c- 65 -schlüssel))+65);
+
+            j = (j + 1) % schlüsselwort.length();
         }
 
         return klar;
     }
+
 
 
     public static void main(String[] argv) {
