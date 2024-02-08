@@ -1,0 +1,38 @@
+package linCrypt;
+
+import Schlange.intArraySchlange;
+
+public class linCrypt {
+
+    public static void main(String[] args) {
+
+        // Schlange s wird erstellt, lauft Aufgabe bereits gegeben
+        String text = "HALLO";
+
+        intArraySchlange s = new intArraySchlange(text.length());
+
+        for (int i = 0; i<text.length(); i++){
+            s.enqueue((int) text.charAt(i) - 64);
+        }
+        System.out.println("Unverschlüsselt: " + s);
+        System.out.println("Verschlüsselt: " + encrypt(s, 3, 5));
+    }
+
+    public static intArraySchlange encrypt(intArraySchlange s, int m, int b){
+
+        // neue Schlange für die verschlüsselten Werte
+        intArraySchlange newSchlange = new intArraySchlange(s.getLength());
+
+        // 1. Wert wird mit gegebenen Parametern verschlüsselt und in die neue Schlange eingefügt
+        newSchlange.enqueue((s.dequeue() * m) + b);
+        int wert = newSchlange.head();
+
+        // Alle weiteren Werte werden mit Modulo verschlüsselt und in die neue Schlange eingefügt
+        while (!s.isEmpty()){
+            wert = (s.dequeue() * (wert % 10)) + b;
+            newSchlange.enqueue(wert);
+        }
+
+        return newSchlange;
+    }
+}
