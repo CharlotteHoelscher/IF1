@@ -1,0 +1,52 @@
+package enigma;
+
+public class Enigma {
+
+    Rotor rgt = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 18);
+    Rotor mid = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE",6);
+    Rotor lft = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO",23);
+
+    Rotor rfl = new Rotor("AEBJCMDZFLGYHXIVKWNROQPUST",0);
+
+    public void step(){
+        rgt.step();
+        if (rgt.getPos() == rgt.getUebertrag()){
+            mid.step();
+            if (mid.getPos() == mid.getUebertrag())
+                lft.step();
+
+        }
+    }
+
+    public char encrypt(char x){
+
+            step();
+
+            x = rgt.transform(x,1);
+            x = mid.transform(x,1);
+            x = lft.transform(x,1);
+
+            x = rfl.transform(x,1);
+
+            x = lft.transform(x,0);
+            x = mid.transform(x,0);
+            x = rgt.transform(x,0);
+
+            return x;
+    }
+    public static void main (String[] argv) {
+
+      Enigma E = new Enigma();
+
+        String s = "JANIUNDCHARLOTTIE";
+        String w="";
+        for(int i=0; i<s.length(); i++) {
+
+
+            w+=E.encrypt(s.charAt(i));
+
+        }
+        System.out.println(w);
+
+    }
+}
