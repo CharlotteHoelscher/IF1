@@ -34,7 +34,7 @@ public class vigenere {
             char c = geheim.charAt(i);
 
             int schlüssel = schlüsselwort.charAt(j)-65;
-
+            // Methode um im Alphabet zu bleiben
             if (c-65 -schlüssel<0){
                 schlüssel= schlüssel-26;
             }
@@ -47,27 +47,28 @@ public class vigenere {
         return klar;
     }
 
-
-
     public static void main(String[] argv) {
         //System.out.println( encode("DERKLARTEXTWIRDZUMGEHEIMTEXT","PLUTO") ); // SPLDZPCNXLIHCKROFGZSWPCFHTIN
         //System.out.println( encode("DERKLARTEXTWERDEGEHEIMTEXT","PLUTO") ); // SPLDZPCNXLIHYKRTRYASXXNXLI
+        //System.out.println(decode("SPLDZPCNXLIHCKROFGZSWPCFHTIN", "PLUTO"));
 
-        System.out.println(decode("SPLDZPCNXLIHCKROFGZSWPCFHTIN", "PLUTO"));
+
         String g1 = "PWTMYTBADKDGPWPFYWFGUESOTLUPNVYWAPKCSOOJWWASTLSUZUSJMJBBRSTIMGPYSXOJWWASMMZQLCHJQWGYDHKOJWWASTMFPADWIPVKLHONZWPDPWRAAGQPRKNJCNPKGPJJLTHYOWOHPGYJWCUEKUZLGAOWKHOGPESMZMRWPBKVFVZTQNLAGSFSMVWTDPWRAAGQPRKNJCNPTGTKEOMSGVLYVCHKBVKLOFOBLGNCIVXWPLYBZAAEOOWKEWEODZKZOGPWGOMSWMPWTIFFLCTUTYGUOSLZSILYOHEWEODSRVVYHSFAVVHHWGIPTGHYHCWJVLERGJWKPDHGJWTUTQNBXGZEUKTWIAZPPMOGPWGJQWGYDHKNJCNPSOVWTZPFOMNQUQFGOWPYTQNBAIVOSXNSNZNVHMSPAHCXBWVDTFJRWFLASXAGPHYHCWJVLEOANWKUPTXIYGUFFSQLLHZRKZFGPYTXIYGUOWKVAEOEAOBBCVOSXVWKUMSGVLYVCHKBOGYOSTSGGUYSTAAPKYWIPLBBRSRIKULYJUVWKUPFHMDKLMWMMFRLCGUVKQSWAGVVWYNVLZSILYROMKKJSBAZSWMOWKHMILSCKZAIRPWZHMGPYSXLWTNCIVXWPIPNOMZGUSSXIMUIPYUUEGUKICMDEOPFMZMRWPGOMYGOZSXBOKLGWKTWHYLUKVEWZDAGVEKUOSYBWPZDHKTDGUFBJEWNJSSLZSILYYUMFPAPAGVKVLWZKV";
         String g2 = "KQOWEFVJPUJUUNUKGLMEKJINMWUXFQMKJBGWRLFNFGHUDWUUMBSVLPSNCMUEKQCTESWREEKOYSSIWCTUAXYOTAPXPLWPNTCGOJBGFQHTDWXIZAYGFFNSXCSEYNCTSSPNTUJNYTGGWZGRWUUNEJUUQEAPYMEKQHUIDUXFPGUYTSMTFFSHNUOCZGMRUWEYTRGKMEEDCTVRECFBDJQCUSWVBPNLGOYLSKMTEFVJJTWWMFMWPNMEMTMHRSPXFSSKFFSTNUOCZGMDOEOYEEKCPJRGPMURSKHFRSEIUEVGOYCWXIZAYGOSAANYDOEOYJLWUNHAMEBFELXYVLWNOJNSIOFRWUCCESWKVIDGMUCGOCRUWGNMAAFFVNSIUDEKQHCEUCPFCMPVSUDGAVEMNYMAMVLFMAOYFNTQCUAFVFJNXKLNEIWCWODCCULWRIFTWGMUSWOVMATNYBUHTCOCWFYTNMGYTQMKBBNLGFBTWOJFTWGNTEJKNEEDCLDHWTVBUVGFBIJGYYIDGMVRDGMPLSWGJLAGOEEKJOFEKNYNOLRIVRWVUHEIWUURWGMUTJCDBNKGMBIDGMEEYGUOTDGGQEUJYOTVGGBRUJYS";
         String key1 = "PLUTO";
+
+        //System.out.println(decode(g1, ""));
         // Finde Wiederholungen und berechne Abstände
         //findeWiederholungen(g2);    // vermutete Schlüsselwortlänge: 7
 
         int schlüsselwortlänge = 5;
 
         // bilde Zeichengruppen
-       String[] gruppen = bildeZeichengruppen(g2, schlüsselwortlänge);
+        String[] gruppen = bildeZeichengruppen(g2, schlüsselwortlänge);
         //System.out.println( Arrays.toString(gruppen) );
 
         // erstelle Häufigkeitsverteilungen der Zeichengruppen
-        for(int l=0; l<schlüsselwortlänge; l++) {
+        for (int l = 0; l < schlüsselwortlänge; l++) {
             double[] h = häufigkeiten(gruppen[l]);
 
             Map<Double, Character> map = new TreeMap<Double, Character>();
@@ -77,12 +78,16 @@ public class vigenere {
                 for (int j = 0; j < 26; j++) {
                     summe += Math.abs(h[(j + verschiebung) % 26] - relHFranz[j]);
                 }
-                map.put(summe, (char) (65+verschiebung));
+                map.put(summe, (char) (65 + verschiebung));
                 //System.out.println(verschiebung + " " + (char) (65 + verschiebung) + " " + summe);
             }
             System.out.println(map);
         }
+
+
     }
+
+
 
     private static double[] relHFranz = {7.63, 0.90, 3.26, 3.66, 14.72, 1.07, 0.87, 0.74, 7.53, 0.55, 0.05, 5.45, 2.97, 7.09, 5.38, 3.02, 1.36, 6.55, 7.95, 7.23, 6.31, 1.63, 0.11, 0.39, 0.31, 0.14};
 
